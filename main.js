@@ -27,8 +27,10 @@ bot.on("message", (message) => {
 
 	if (command === "ping") {
 		bot.commands.get("ping").execute(message, args);
-	} else if (command === "you") {
-		message.channel.send("I am a bot Linda");
+	} else if (command === "bot") {
+		bot.commands.get("bot").execute(message, args);
+	} else if (command === "embed") {
+		bot.commands.get("embed").execute(message, args);
 	}
 });
 
