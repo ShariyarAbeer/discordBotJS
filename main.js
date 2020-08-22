@@ -3,6 +3,18 @@ const { prefix, token } = require("./config.json");
 
 const bot = new Discord.Client();
 
+const cmd = require("fs");
+
+bot.commands = new Discord.Collection();
+
+const commandFiles = cmd
+	.readdirSync("./commands/")
+	.filter((file) => file.endsWith(".js"));
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	bot.commands.set(command.name, command);
+}
+
 bot.once("ready", () => {
 	console.log("Bot is Online!! Happy Coding !");
 });
@@ -14,7 +26,7 @@ bot.on("message", (message) => {
 	const command = args.shift().toLowerCase();
 
 	if (command === "ping") {
-		message.channel.send("Pong!!!");
+		bot.commands.get("ping").execute(message, args);
 	} else if (command === "you") {
 		message.channel.send("I am a bot Linda");
 	}
