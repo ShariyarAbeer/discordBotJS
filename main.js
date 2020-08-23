@@ -31,6 +31,8 @@ bot.on("message", (message) => {
 		bot.commands.get("bot").execute(message, args);
 	} else if (command === "embed") {
 		bot.commands.get("embed").execute(message, args);
+	} else if (command === "poll") {
+		bot.commands.get("poll").execute(message, args);
 	}
 });
 
